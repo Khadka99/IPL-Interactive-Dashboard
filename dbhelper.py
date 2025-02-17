@@ -2,8 +2,6 @@ import mysql.connector
 import os
 import pandas as pd
 
-#ipl = pd.read_csv("ipl.csv")
-
 class DB:
 
     def __init__(self):
