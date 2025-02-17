@@ -3,20 +3,19 @@ import os
 import pandas as pd
 
 class DB:
-
     def __init__(self):
-
         try:
             self.conn = mysql.connector.connect(
                 host='localhost',
                 user='root',
                 password='adhya',
                 database='revision'
-                )
+            )
             self.mycursor = self.conn.cursor()
             print('Connection established')
-        except:
-            print('connection error')
+        except Exception as e:
+            print(f'Connection error: {e}')
+
 
 
     def fetch_player_name(self):
