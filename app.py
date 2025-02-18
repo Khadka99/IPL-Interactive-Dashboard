@@ -239,11 +239,23 @@ elif analysis_type == "About Dashboard":
         ### Welcome to the IPL Interactive Dashboard!
         This dashboard provides in-depth analysis of IPL matches, players, and teams. 
         You can explore:
-        - **Player Statistics**: Batting and bowling performance of individual players.
-        - **Team Statistics**: Performance of teams, including head-to-head comparisons.
-        - **Toss Analysis**: Impact of toss decisions on match outcomes.
 
-        Use the sidebar to navigate between different sections and customize your analysis.
+        - **Match Overview**: Summaries of all IPL matches, teams, and results.
+        - **Player Statistics**: Batting and bowling performance of individual players, such as runs scored, wickets taken, strike rates, and more.
+        - **Team Statistics**: Performance of teams, including head-to-head comparisons, win percentages.
+        - **Season-wise Analysis**: Trends and statistics for specific IPL seasons, including top performers and team standings.
+        - **Toss Analysis**: Impact of toss decisions on match outcomes.
+        - **Interactive Visualizations**: Bar Charts, and Pie Chart to help you visualize data effectively.
+
+        Use the sidebar to navigate between different sections and customize your analysis. You can also apply filters to focus on specific teams, players, or seasons.
+
+        ### How to Use:
+        1. **Navigate**: Use the sidebar to select the type of analysis you want to perform.
+        2. **Filter**: Apply filters to narrow down data by team, or player.
+        3. **Explore**: Click on charts, tables, or player names to dive deeper into the data.
+        4. **Export**: Download reports or visualizations for offline use.
+
+        Enjoy exploring the world of IPL cricket with this interactive dashboard!
         """)
 
 
