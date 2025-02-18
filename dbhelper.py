@@ -143,3 +143,117 @@ class DB:
         params = (bowling_team, winner)
         self.mycursor.execute(query, params)
         return self.mycursor.fetchall()
+
+    def player_of_match(self):
+        query = """
+        SELECT 
+            player_of_match AS 'Name', 
+            COUNT(*) AS 'Total'
+        FROM (
+            SELECT DISTINCT id, player_of_match
+            FROM ipl
+        ) AS match_player
+        GROUP BY player_of_match
+        ORDER BY COUNT(*) DESC
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def top_batter(self):
+        query = """
+                SELECT batter,sum(batsman_runs) AS 'Total Run' 
+                FROM ipl
+                GROUP BY batter
+                ORDER BY `Total Run` DESC
+                limit 10
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def top_bowler(self):
+        query = """
+                SELECT bowler, sum(is_wicket) AS 'total_wicket'
+                 FROM ipl
+                 WHERE dismissal_kind = 'cought' OR dismissal_kind = 'bowled' OR 
+                 dismissal_kind = 'run_out' OR dismissal_kind = 'lbw' OR 
+                 dismissal_kind = 'stumped' OR dismissal_kind = 'caught and bowled' OR
+                 dismissal_kind = 'hit wicket'
+                GROUP BY bowler
+                ORDER BY total_wicket DESC
+                LIMIT 10;
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def top_fielder(self):
+        query = """
+                SELECT fielder,count(*) AS 'Total Wicket'
+                FROM ipl
+                WHERE dismissal_kind = 'caught' OR  dismissal_kind = 'run out' AND fielder IS NOT NULL
+                GROUP BY fielder
+                ORDER BY count(dismissal_kind) DESC
+                LIMIT 10
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def total_run_by_teams(self):
+        query = """
+        SELECT batting_team AS 'Teams', SUM(total_runs) AS 'Total Runs'
+        FROM ipl
+        GROUP BY batting_team
+        ORDER BY SUM(total_runs) DESC
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def top_4_hitter(self):
+        query = """
+                SELECT batter AS 'Batter',count(*) AS 'Total' 
+                FROM ipl
+                WHERE batsman_runs = 4
+                GROUP BY batter
+                ORDER BY count(*) DESC
+                LIMIT 10
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def top_6_hitter(self):
+        query = """
+                SELECT batter AS 'Batter',count(*) AS 'Total' 
+                FROM ipl
+                WHERE batsman_runs = 6
+                GROUP BY batter
+                ORDER BY count(*) DESC
+                LIMIT 10
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def season_winners(self):
+        query = """
+                SELECT DISTINCT season AS 'Seasons', season_winner AS 'Winner' 
+                FROM ipl
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+    def win_type_distribution(self):
+        query = """
+                SELECT result AS 'Result',
+                    SUM(CASE WHEN result = 'runs' THEN 1 ELSE 0 END) AS 'Runs',  
+                    SUM(CASE WHEN result = 'wickets' THEN 1 ELSE 0 END) AS 'Wickets',
+                    SUM(CASE WHEN result = 'tie' THEN 1 ELSE 0 END) AS 'Tie',
+                    SUM(CASE WHEN result = 'no result' THEN 1 ELSE 0 END) AS 'No_Resuls'
+                    FROM (
+                        SELECT DISTINCT id, result
+                        FROM ipl
+                    ) AS results
+                GROUP BY result
+        """
+        self.mycursor.execute(query)
+        return self.mycursor.fetchall()
+
+
+
