@@ -3,7 +3,7 @@ import pandas as pd
 from dbhelper import DB
 import plotly.graph_objects as go
 import plotly.express as px
-import matplotlib.pyplot as plt
+
 
 #analysis_type = st.sidebar.radio("Select Analysis Type", ["Player Analysis", "Team Analysis", "Overall Analysis"])
 st.set_page_config(layout='wide')
